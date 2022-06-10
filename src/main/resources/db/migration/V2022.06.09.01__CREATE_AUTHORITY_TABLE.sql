@@ -1,0 +1,12 @@
+CREATE TABLE IF NOT EXISTS AUTHORITY
+(
+    ID          BIGSERIAL primary key,
+    DESCRIPTION VARCHAR(255),
+    TITLE       VARCHAR(255) unique
+);
+
+
+CREATE INDEX IF NOT EXISTS ix_authority_id on AUTHORITY (ID);
+
+CREATE INDEX IF NOT EXISTS ix_authority_title on AUTHORITY (TITLE);
+

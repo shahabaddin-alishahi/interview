@@ -1,0 +1,36 @@
+apis:
+  version: v1
+  internal: /_api/${apis.version}
+  secure: /api/${apis.version}
+  open: /open/${apis.version}
+
+spring:
+  application:
+    name: backoffice-manager #name of the application
+  cloud:
+    config:
+      uri: http://config.neobank.digital:8001 #where the config-service is running
+      fail-fast: true #the service will not run if it can't reach the config-service
+      password: Aa123456 #password of the config-service
+      username: user #username of the config-service
+  data:
+    rest:
+      base-path: '/admin'
+---
+spring:
+  profiles: development,test
+  cloud:
+    config:
+      enabled: false
+  flyway:
+    enabled: true
+  data:
+    rest:
+      base-path: '/admin'
+eureka:
+  profiles: development,test
+  client:
+    enabled: false
+logging:
+  level:
+    com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver: WARN
