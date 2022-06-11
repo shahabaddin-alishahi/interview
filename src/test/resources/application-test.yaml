@@ -1,0 +1,44 @@
+apis:
+  version: v1
+  internal: /_api/${apis.version}
+  secure: /api/${apis.version}
+  open: /open/${apis.version}
+
+server:
+  port: 8080
+  servlet:
+    context-path: /interview
+
+spring:
+  profiles:
+    active: development
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+  datasource:
+    url: ${DB_HOST:jdbc:postgresql://localhost:5432/postgres}
+    username: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:postgres}
+
+
+swagger:
+  host: localhost:${server.port}
+  api:
+    title: 'signicat Interview'
+    description: 'Swagger 2 API Documentation'
+    termsOfServiceUrl: 'https://signicat.digital'
+    version: ${apis.version}
+    basePackage: com.signicat.interview.controller
+
+
+signicat:
+  feign:
+    connection-timeout: 10000
+    response-timeout: 10000
+  jwt:
+    secret: 'changeit'
+    access-token-validity-in-minute: 100
+    refresh-token-validity-in-minute: 200
