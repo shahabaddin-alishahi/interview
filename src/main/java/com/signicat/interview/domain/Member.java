@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -45,6 +46,10 @@ public class Member implements UserDetails {
     private Boolean isEnabled;
 
     private Boolean isWorking;
+
+    private LocalDateTime createDate;
+
+    private LocalDateTime updateDate;
 
 
     @ManyToMany(fetch = FetchType.EAGER)

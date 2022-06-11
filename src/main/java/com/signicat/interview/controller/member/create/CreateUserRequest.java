@@ -1,31 +1,28 @@
 package com.signicat.interview.controller.member.create;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.util.List;
+import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Builder
 @Data
 public class CreateUserRequest {
+
+    @NotBlank
     private String username;
+    @NotBlank
     private String password;
+    @NotBlank
     private String mobileNumber;
+    @NotBlank
     private String firstName;
+    @NotBlank
     private String lastName;
+    @NotBlank
     private String nationalCode;
     private Boolean isEnabled;
     private Set<String> authorityIds;
-
-    @Data
-    @Builder
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class FlowStatusType {
-        private String statusType;
-    }
 
 }

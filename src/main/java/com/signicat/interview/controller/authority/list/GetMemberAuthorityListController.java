@@ -1,4 +1,4 @@
-package com.signicat.interview.controller.member.authority.list;
+package com.signicat.interview.controller.authority.list;
 
 import com.signicat.interview.config.security.OnlineUser;
 import lombok.RequiredArgsConstructor;

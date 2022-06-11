@@ -1,12 +1,14 @@
 package com.signicat.interview.controller.member.update;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Set;
 
 @Builder
-@Data
+@Setter
+@Getter
 public class UpdateUserResponse {
     private String id;
     private String username;
@@ -17,5 +19,7 @@ public class UpdateUserResponse {
     private Boolean isEnabled;
     private Boolean isWorking;
     private Set<String> authorityTitles;
+    private String createDate;
+    private String updateDate;
 
 }

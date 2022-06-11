@@ -47,6 +47,8 @@ public class GetUsersListController {
                                 .nationalCode(user.getNationalCode())
                                 .isWorking(user.getIsWorking())
                                 .isEnabled(user.getIsEnabled())
+                                .createDate(String.valueOf(user.getCreateDate()))
+                                .updateDate(String.valueOf(user.getUpdateDate()))
                                 .build())
                 .collect(Collectors.toList());
 

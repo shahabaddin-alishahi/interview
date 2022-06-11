@@ -1,12 +1,17 @@
 package com.signicat.interview.domain;
 
-import lombok.Data;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
-@Data
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
+@Builder
 public class Authority implements GrantedAuthority {
 
     @Id
@@ -16,6 +21,10 @@ public class Authority implements GrantedAuthority {
     private String description;
 
     private String title;
+
+    private LocalDateTime createDate;
+
+    private LocalDateTime updateDate;
 
     @Override
     public String getAuthority() {

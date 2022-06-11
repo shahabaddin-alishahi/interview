@@ -20,6 +20,8 @@ public class UsersListResponse {
         private String nationalCode;
         private Boolean isWorking;
         private Boolean isEnabled;
+        private String createDate;
+        private String updateDate;
     }
 
     private List<UserResponse> items;

@@ -1,7 +1,10 @@
 package com.signicat.interview.service.impl;
 
 import com.signicat.interview.config.security.JwtTokenProvider;
-import com.signicat.interview.domain.*;
+import com.signicat.interview.domain.AuthenticationResult;
+import com.signicat.interview.domain.Authority;
+import com.signicat.interview.domain.Member;
+import com.signicat.interview.domain.ProtectedValue;
 import com.signicat.interview.exception.*;
 import com.signicat.interview.repository.MemberRepository;
 import com.signicat.interview.service.AuthorityService;
@@ -21,7 +24,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.*;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -91,6 +97,8 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
                 .password(passwordEncoder.encode(password))
                 .isEnabled(isEnabled)
                 .authorities(authorities)
+                .createDate(LocalDateTime.now())
+                .updateDate(LocalDateTime.now())
                 .isWorking(false)
                 .build());
     }
@@ -129,6 +137,8 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 
         if (authorityIds.isEmpty())
             member.setAuthorities(null);
+
+        member.setUpdateDate(LocalDateTime.now());
 
         return member;
     }

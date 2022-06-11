@@ -1,12 +1,14 @@
 package com.signicat.interview.controller.member.create;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Set;
 
 @Builder
-@Data
+@Setter
+@Getter
 public class CreateUserResponse {
     private String id;
     private String username;
@@ -16,4 +18,7 @@ public class CreateUserResponse {
     private String nationalCode;
     private Boolean isEnabled;
     private Set<String> authorityTitles;
+    private String createDate;
+    private String updateDate;
+
 }

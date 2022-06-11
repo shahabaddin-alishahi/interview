@@ -40,6 +40,8 @@ public class UpdateUserController {
                 .nationalCode(member.getNationalCode())
                 .isEnabled(member.isEnabled())
                 .isWorking(member.getIsWorking())
+                .createDate(String.valueOf(member.getCreateDate()))
+                .updateDate(String.valueOf(member.getUpdateDate()))
                 .authorityTitles(member.getAuthorities().stream().map(Authority::getDescription).collect(Collectors.toSet()))
                 .build();
     }

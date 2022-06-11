@@ -4,7 +4,6 @@ import com.signicat.interview.domain.Authority;
 import com.signicat.interview.domain.Member;
 import com.signicat.interview.repository.AuthorityRepository;
 import com.signicat.interview.repository.MemberRepository;
-import com.signicat.interview.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -12,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -49,10 +49,12 @@ public class ApplicationStartupConfig {
                             .lastName("admin lastName")
                             .isEnabled(true)
                             .isWorking(true)
+                            .createDate(LocalDateTime.now())
+                            .updateDate(LocalDateTime.now())
                             .authorities(authoritySet)
                             .build());
 
-                    log.info("Admin account's password is set to : {}", password);
+                    log.info("\nAdmin account's password is set to : {}\n", password);
                 }
         );
     }

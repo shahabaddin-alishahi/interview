@@ -19,4 +19,6 @@ public class GetUserResponse {
     private Boolean isEnabled;
     private Set<String> authorityTitles;
     private Set<String> authorityIds;
+    private String createDate;
+    private String updateDate;
 }

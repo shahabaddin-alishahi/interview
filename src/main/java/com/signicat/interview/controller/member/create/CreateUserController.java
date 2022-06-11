@@ -29,6 +29,8 @@ public class CreateUserController {
 
         return CreateUserResponse.builder()
                 .id(String.valueOf(member.getId()))
+                .createDate(String.valueOf(member.getCreateDate()))
+                .updateDate(String.valueOf(member.getUpdateDate()))
                 .firstName(member.getFirstName())
                 .lastName(member.getLastName())
                 .username(member.getUsername())
