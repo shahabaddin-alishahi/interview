@@ -51,6 +51,8 @@ public class Member implements UserDetails {
 
     private LocalDateTime updateDate;
 
+    @ManyToOne
+    @JoinColumn(name = "user_group_id")
     private UserGroup userGroup;
 
     @ManyToMany(fetch = FetchType.EAGER)

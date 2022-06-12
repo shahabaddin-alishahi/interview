@@ -8,7 +8,7 @@ public interface AuthorityService {
 
     List<Authority> getListOfAllAuthorities();
 
-    Authority findById(String Id);
+    Authority findById(String id);
 
     Authority createAuthority(String title, String description);
 

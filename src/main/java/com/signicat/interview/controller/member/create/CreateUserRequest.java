@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Builder
@@ -24,5 +25,7 @@ public class CreateUserRequest {
     private String nationalCode;
     private Boolean isEnabled;
     private Set<String> authorityIds;
+    @NotNull
+    private String userGroupId;
 
 }

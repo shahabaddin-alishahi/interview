@@ -27,8 +27,8 @@ public class AuthorityServiceImpl implements AuthorityService {
     }
 
     @Override
-    public Authority findById(String Id) {
-        return authorityRepository.findById(Long.parseLong(Id))
+    public Authority findById(String id) {
+        return authorityRepository.findById(Long.parseLong(id))
                 .orElseThrow(AuthorityNotFoundException::new);
     }
 

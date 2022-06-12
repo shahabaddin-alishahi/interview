@@ -1,4 +1,4 @@
-package com.signicat.interview.controller.authority.list;
+package com.signicat.interview.controller.member.authority;
 
 import com.signicat.interview.config.security.OnlineUser;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@PreAuthorize("hasAuthority('AUTHORITY_GET_LIST')")
+@PreAuthorize("hasAuthority('USER_LOGGED_IN')")
 @RequiredArgsConstructor
 @RestController
 public class GetMemberAuthorityListController {
@@ -19,6 +19,7 @@ public class GetMemberAuthorityListController {
 
     @GetMapping("${apis.secure}/member/me/authorities")
     public List<String> handle() {
-        return onlineUser.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
+        return onlineUser.getAuthorities().stream().map(
+                GrantedAuthority::getAuthority).collect(Collectors.toList());
     }
 }

@@ -14,7 +14,9 @@ public class UpdateUserRequest {
     private String firstName;
     private String lastName;
     private String nationalCode;
+    private Boolean isWorking;
     private Boolean isEnabled;
     private Set<String> authorityIds;
+    private String userGroupId;
 
 }

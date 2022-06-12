@@ -20,5 +20,9 @@ public class CreateUserResponse {
     private Set<String> authorityTitles;
     private String createDate;
     private String updateDate;
+    private Boolean isWorking;
+    private String userGroupId;
+    private String userGroupTitle;
+
 
 }

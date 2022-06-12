@@ -21,5 +21,7 @@ public class UpdateUserResponse {
     private Set<String> authorityTitles;
     private String createDate;
     private String updateDate;
+    private String userGroupTitle;
+    private String userGroupId;
 
 }

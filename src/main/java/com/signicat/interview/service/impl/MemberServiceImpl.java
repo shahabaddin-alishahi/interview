@@ -1,14 +1,12 @@
 package com.signicat.interview.service.impl;
 
 import com.signicat.interview.config.security.JwtTokenProvider;
-import com.signicat.interview.domain.AuthenticationResult;
-import com.signicat.interview.domain.Authority;
-import com.signicat.interview.domain.Member;
-import com.signicat.interview.domain.ProtectedValue;
+import com.signicat.interview.domain.*;
 import com.signicat.interview.exception.*;
 import com.signicat.interview.repository.MemberRepository;
 import com.signicat.interview.service.AuthorityService;
 import com.signicat.interview.service.MemberService;
+import com.signicat.interview.service.UserGroupService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Lazy;
@@ -40,17 +38,21 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
     private final AuthorityService authorityService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
+    private final UserGroupService userGroupService;
 
     public MemberServiceImpl(MemberRepository memberRepository,
                              JwtTokenProvider jwtTokenProvider,
                              AuthorityService authorityService,
                              @Lazy PasswordEncoder passwordEncoder,
-                             @Lazy AuthenticationManager authenticationManager) {
+                             @Lazy AuthenticationManager authenticationManager,
+                             @Lazy UserGroupService userGroupService) {
+
         this.memberRepository = memberRepository;
         this.jwtTokenProvider = jwtTokenProvider;
         this.authorityService = authorityService;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
+        this.userGroupService = userGroupService;
     }
 
     @Override
@@ -84,11 +86,15 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
     @Override
     public Member createUser(String username, String password, String firstName, String lastName,
                              String nationalCode, String mobileNumber, Boolean isEnabled,
+                             String userGroupId,
                              Set<String> authorityIds) {
         Set<Authority> authorities = authorityIds.stream().map(authorityService::findById)
                 .collect(Collectors.toSet());
 
+        UserGroup userGroup = userGroupService.findById(userGroupId);
+
         return memberRepository.save(Member.builder()
+                .userGroup(userGroup)
                 .firstName(firstName)
                 .lastName(lastName)
                 .nationalCode(nationalCode)
@@ -106,8 +112,9 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
     @Transactional
     @Override
     public Member updateUser(String userId, String username, String password, String firstName,
-                             String lastName, String nationalCode, String mobileNumber, Boolean isEnabled,
-                             Set<String> authorityIds) {
+                             String lastName, String nationalCode, String mobileNumber,
+                             Boolean isEnabled, Boolean isWorking,
+                             String userGroupId, Set<String> authorityIds) {
 
         Member member = this.findById(userId);
 
@@ -132,11 +139,19 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
         if (Objects.nonNull(isEnabled))
             member.setIsEnabled(isEnabled);
 
+        if (Objects.nonNull(isWorking))
+            member.setIsEnabled(isWorking);
+
         if (!authorityIds.isEmpty())
             member.setAuthorities(authorityIds.stream().map(authorityService::findById).collect(Collectors.toSet()));
 
         if (authorityIds.isEmpty())
             member.setAuthorities(null);
+
+        if (Objects.nonNull(userGroupId)) {
+            UserGroup userGroup = userGroupService.findById(userGroupId);
+            member.setUserGroup(userGroup);
+        }
 
         member.setUpdateDate(LocalDateTime.now());
 

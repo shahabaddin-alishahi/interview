@@ -21,7 +21,7 @@ public class GetUsersListController {
 
     private final MemberService memberService;
 
-    @GetMapping("${apis.secure}/member")
+    @GetMapping("${apis.secure}/member/list")
     public UsersListResponse handle(
             @RequestParam(name = "name", required = false) String name,
             @RequestParam(name = "nationalCode", required = false) String nationalCode,
@@ -49,6 +49,9 @@ public class GetUsersListController {
                                 .isEnabled(user.getIsEnabled())
                                 .createDate(String.valueOf(user.getCreateDate()))
                                 .updateDate(String.valueOf(user.getUpdateDate()))
+                                .isWorking(user.getIsWorking())
+                                .userGroupId(String.valueOf(user.getUserGroup().getId()))
+                                .userGroupTitle(user.getUserGroup().getTitle())
                                 .build())
                 .collect(Collectors.toList());
 

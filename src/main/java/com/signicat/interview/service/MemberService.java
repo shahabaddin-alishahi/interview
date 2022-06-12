@@ -22,11 +22,11 @@ public interface MemberService extends UserDetailsService {
 
     Member createUser(String username, String password, String firstName,
                       String lastName, String nationalCode, String mobileNumber, Boolean isEnabled,
-                      Set<String> authorityIds);
+                      String userGroupId, Set<String> authorityIds);
 
     Member updateUser(String userId, String username, String password, String firstName,
                       String lastName, String nationalCode, String mobileNumber, Boolean isEnabled,
-                      Set<String> authorityIds);
+                      Boolean isWorking, String userGroupId, Set<String> authorityIds);
 
     AuthenticationResult login(String username, String password);
 

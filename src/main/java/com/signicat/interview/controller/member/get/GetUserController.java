@@ -38,6 +38,9 @@ public class GetUserController {
                         .collect(Collectors.toSet()))
                 .createDate(String.valueOf(member.getCreateDate()))
                 .updateDate(String.valueOf(member.getUpdateDate()))
+                .isWorking(member.getIsWorking())
+                .userGroupId(String.valueOf(member.getUserGroup().getId()))
+                .userGroupTitle(member.getUserGroup().getTitle())
                 .build();
     }
 }

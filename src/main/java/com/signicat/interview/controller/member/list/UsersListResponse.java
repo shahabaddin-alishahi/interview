@@ -22,6 +22,8 @@ public class UsersListResponse {
         private Boolean isEnabled;
         private String createDate;
         private String updateDate;
+        private String userGroupId;
+        private String userGroupTitle;
     }
 
     private List<UserResponse> items;

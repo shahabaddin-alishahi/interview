@@ -24,12 +24,13 @@ public class UpdateUserController {
 
     @PutMapping("${apis.secure}/member/{userId}")
     public UpdateUserResponse handle(@PathVariable String userId,
-                                     @RequestBody @Valid UpdateUserRequest request){
+                                     @RequestBody @Valid UpdateUserRequest request) {
 
-        Member member = memberService.updateUser(userId ,request.getUsername(),
-                request.getPassword(), request.getFirstName(),request.getLastName(),
-                request.getNationalCode(),request.getMobileNumber(),request.getIsEnabled(),
-                Objects.isNull(request.getAuthorityIds())? Collections.emptySet() : request.getAuthorityIds());
+        Member member = memberService.updateUser(userId, request.getUsername(),
+                request.getPassword(), request.getFirstName(), request.getLastName(),
+                request.getNationalCode(), request.getMobileNumber(), request.getIsEnabled(), request.getIsWorking(),
+                request.getUserGroupId(),
+                Objects.isNull(request.getAuthorityIds()) ? Collections.emptySet() : request.getAuthorityIds());
 
         return UpdateUserResponse.builder()
                 .id(String.valueOf(member.getId()))
@@ -42,6 +43,8 @@ public class UpdateUserController {
                 .isWorking(member.getIsWorking())
                 .createDate(String.valueOf(member.getCreateDate()))
                 .updateDate(String.valueOf(member.getUpdateDate()))
+                .userGroupId(String.valueOf(member.getUserGroup().getId()))
+                .userGroupTitle(member.getUserGroup().getTitle())
                 .authorityTitles(member.getAuthorities().stream().map(Authority::getDescription).collect(Collectors.toSet()))
                 .build();
     }
