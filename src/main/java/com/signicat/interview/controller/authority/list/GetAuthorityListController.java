@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @RestController
 public class GetAuthorityListController {
 
-    private AuthorityService authorityService;
+    private final AuthorityService authorityService;
 
     @GetMapping("${apis.secure}/authority/list")
     public GetAuthorityListResponse handle() {
