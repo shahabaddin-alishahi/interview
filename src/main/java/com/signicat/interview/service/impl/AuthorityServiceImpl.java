@@ -36,6 +36,8 @@ public class AuthorityServiceImpl implements AuthorityService {
     public Authority createAuthority(String title, String description) {
         return authorityRepository.save(Authority.builder()
                 .description(description)
+                .createDate(LocalDateTime.now())
+                .updateDate(LocalDateTime.now())
                 .title(title)
                 .build());
     }
